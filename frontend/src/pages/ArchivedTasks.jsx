@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import API_BASE_URL from "../services/api"; 
+import API from "../services/api";
 import TaskCard from "../components/TaskCard";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +10,7 @@ const ArchivedTasks = () => {
   const fetchArchivedTasks = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("${API_BASE_URL}/tasks/archived", {
+      const response = await API.get("/tasks/archived", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
