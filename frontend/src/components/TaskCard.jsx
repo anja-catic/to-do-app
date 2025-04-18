@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../services/api"; 
+
 
 const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -44,7 +46,7 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/tasks/${task.id}`, {
+      await axios.delete(`${API_BASE_URL}/tasks/${task.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +60,7 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
   const handleEdit = async () => {
     try {
       await axios.put(
-        `http://127.0.0.1:8000/tasks/${task.id}`,
+        `${API_BASE_URL}/tasks/${task.id}`,
         {
           title: editedTitle,
           description: editedDesc,
@@ -82,7 +84,7 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
   const handleArchiveToggle = async () => {
     try {
       await axios.patch(
-        `http://127.0.0.1:8000/tasks/${task.id}/archive`,
+        `${API_BASE_URL}/tasks/${task.id}/archive`,
         {},
         {
           headers: {
@@ -99,7 +101,7 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
   const handleMarkAsDone = async () => {
     try {
       await axios.patch(
-        `http://127.0.0.1:8000/tasks/${task.id}`,
+        `${API_BASE_URL}/tasks/${task.id}`,
         null,
         {
           params: { status: "done" },
