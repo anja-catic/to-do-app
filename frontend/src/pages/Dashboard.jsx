@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import API_BASE_URL from "../services/api"; 
+import API from "../services/api"; 
 import TaskCard from "../components/TaskCard";
 import TaskForm from "../components/TaskForm";
 import CalendarView from "../components/CalendarView";
@@ -30,7 +29,7 @@ const Dashboard = () => {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("${API_BASE_URL}/tasks", {
+      const response = await API.get("/tasks", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
