@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../services/api";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
       params.append("username", formData.username);
       params.append("password", formData.password);
 
-      const response = await API.post("/login", params, {
+      const response = await axios.post("http://127.0.0.1:8000/login", params, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
