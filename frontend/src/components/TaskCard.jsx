@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import API_BASE_URL from "../services/api"; 
+import API from "../services/api";
 
 
 const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
@@ -46,7 +45,7 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_BASE_URL}/tasks/${task.id}`, {
+      await API.delete(`/tasks/${task.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,8 +58,8 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
 
   const handleEdit = async () => {
     try {
-      await axios.put(
-        `${API_BASE_URL}/tasks/${task.id}`,
+      await API.put(
+        `/tasks/${task.id}`,
         {
           title: editedTitle,
           description: editedDesc,
@@ -83,8 +82,8 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
 
   const handleArchiveToggle = async () => {
     try {
-      await axios.patch(
-        `${API_BASE_URL}/tasks/${task.id}/archive`,
+      await API.patch(
+        `/tasks/${task.id}/archive`,
         {},
         {
           headers: {
@@ -100,8 +99,8 @@ const TaskCard = ({ task, onTaskUpdated, isArchived = false }) => {
 
   const handleMarkAsDone = async () => {
     try {
-      await axios.patch(
-        `${API_BASE_URL}/tasks/${task.id}`,
+      await API.patch(
+        `/tasks/${task.id}`,
         null,
         {
           params: { status: "done" },
