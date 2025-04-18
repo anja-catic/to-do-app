@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import API_BASE_URL from "../services/api"; 
+import API from "../services/api";
 
 const TaskForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState("");
@@ -13,8 +12,8 @@ const TaskForm = ({ onTaskAdded }) => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.post(
-        "${API_BASE_URL}/lists/1/tasks",
+      await API.post(
+        "/lists/1/tasks",
         {
           title,
           description: desc,
